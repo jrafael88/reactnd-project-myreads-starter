@@ -13,12 +13,9 @@ class SearchBooks extends Component {
     if (!query) return this.clearSearch();
     const results = await search(query);
     if (results.error) return this.clearSearch();
-    const resultsMap = results.map(result => {
-      return Object.assign({}, result);
-    });
 
     this.setState({
-      results: resultsMap
+      results: results
     });
   }
 
@@ -35,7 +32,6 @@ class SearchBooks extends Component {
           <Link to='/' className="close-search">Close</Link>
           <div className="search-books-input-wrapper">
             <input type="text" placeholder="Search by title or author" onChange={e => this.search(e.target.value)} />
-
           </div>
         </div>
         <div className="search-books-results">
