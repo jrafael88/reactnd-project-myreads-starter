@@ -19,8 +19,8 @@ class BooksApp extends React.Component {
       })
   }
 
-  onChangeBook = async (book, shelf) => {
-    await BooksAPI.update(book, shelf)
+  onChangeBook = (book, shelf) => {
+    BooksAPI.update(book, shelf)
       .then((item) => {
         this.setState((state) => {
           const newBook = Object.assign({}, book, { shelf })

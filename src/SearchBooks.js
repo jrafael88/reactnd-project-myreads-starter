@@ -14,8 +14,13 @@ class SearchBooks extends Component {
     const results = await search(query);
     if (results.error) return this.clearSearch();
 
+    const resultsMap = results.map(result => {
+      const book = this.props.books.find(book => book.id === result.id);
+      return Object.assign({}, result, book);
+    });
+
     this.setState({
-      results: results
+      results: resultsMap
     });
   }
 
