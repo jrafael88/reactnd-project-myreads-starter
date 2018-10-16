@@ -10,18 +10,20 @@ class SearchBooks extends Component {
   }
   
   search = async query => {
-    if (!query) return this.clearSearch();
-    const results = await search(query);
-    if (results.error) return this.clearSearch();
+    if (!query.trim()) return this.clearSearch();
+    search(query)
+    .then((results) => {
+      if (results.error) return this.clearSearch();
 
-    const resultsMap = results.map(result => {
-      const book = this.props.books.find(book => book.id === result.id);
-      return Object.assign({}, result, book);
-    });
-
-    this.setState({
-      results: resultsMap
-    });
+      const resultsMap = results.map(result => {
+        const book = this.props.books.find(book => book.id === result.id);
+        return Object.assign({}, result, book);
+      });
+  
+      this.setState({
+        results: resultsMap
+      });
+    })
   }
 
   clearSearch = () => {
